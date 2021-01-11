@@ -9,12 +9,24 @@ public class CengTree
     {
         CengTreeNode.order = order;
         // TODO: Initialize the class
+        root = new CengTreeNodeLeaf(null);
 
     }
 
     public void addVideo(CengVideo video)
     {
         // TODO: Insert Video to Tree
+
+        root.add(video);
+        if( root.isFull()){
+            CengTreeNodeInternal newRoot = new CengTreeNodeInternal(null);
+            int mid = root.keyAtMid();
+            CengTreeNode newChild = root.split();
+            newRoot.addKey(mid);
+            newRoot.addChild(root);
+            newRoot.addChild(newChild);
+            root = newRoot;
+        }
     }
 
     public ArrayList<CengTreeNode> searchVideo(Integer key)

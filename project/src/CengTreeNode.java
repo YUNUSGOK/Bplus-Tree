@@ -44,4 +44,10 @@ public abstract class CengTreeNode
     }
 
     // Extra Functions
+
+    public abstract void add(CengVideo video);
+    public abstract boolean isFull();
+    public abstract CengTreeNode split();
+    public abstract int keyAtZero();
+    public abstract int keyAtMid();
 }
