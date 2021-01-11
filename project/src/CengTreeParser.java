@@ -1,16 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CengTreeParser
 {
     public static ArrayList<CengVideo> parseVideosFromFile(String filename)
     {
-        ArrayList<CengVideo> videoList = new ArrayList<CengVideo>();
+        ArrayList<CengVideo> videoList = new ArrayList<>();
 
         // You need to parse the input file in order to use GUI tables.
         // TODO: Parse the input file, and convert them into CengVideos
@@ -45,7 +43,7 @@ public class CengTreeParser
         return videoList;
     }
 
-    public static void startParsingCommandLine() throws IOException
+    public static void startParsingCommandLine()
     {
         // TODO: Start listening and parsing command line -System.in-.
 
@@ -56,31 +54,30 @@ public class CengTreeParser
         String channelName;
         String category;
         CengVideo video;
-        ArrayList<CengTreeNode> visitedNodes;
+
         while(true){
 
             String input = scanner.nextLine();
-            if(input == "quit"){
+            if(input.equals("quit")){
                 break;
             }
-            else if(input == "print" ){
+            else if(input.equals("print")){
                 CengVideoRunner.printTree();
                 continue;
             }
             inputArray =input.split("\\|");
-            if(inputArray[0] == "search"){
+            if(inputArray[0].equals("search")){
                 key = Integer.parseInt(inputArray[1]);
                 CengVideoRunner.searchVideo(key);
-                continue;
             }
-            else if(inputArray[0] == "add"){
+            else if(inputArray[0].equals("add") ){
                 key = Integer.parseInt(inputArray[1]);
                 videoTitle = inputArray[1];
                 channelName = inputArray[2];
                 category = inputArray[3];
                 video = new CengVideo(key, videoTitle, channelName, category);
                 CengVideoRunner.addVideo(video);
-                continue;
+
             }
 
         }
