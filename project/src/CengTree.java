@@ -32,7 +32,6 @@ public class CengTree
     public ArrayList<CengTreeNode> searchVideo(Integer key)
     {
 
-        String tabs = "\t";
         ArrayList<CengTreeNode> path = new ArrayList<>();
         if(root.find(key, path, 0)){
             for(int i=0; i<path.size(); i++){
@@ -43,7 +42,7 @@ public class CengTree
                 else {
                     CengTreeNodeLeaf n = (CengTreeNodeLeaf) path.get(i);
                     for(int j=0; j<n.videoCount();j++){
-                        if(n.videoKeyAtIndex(j)==key){
+                        if(n.videoKeyAtIndex(j).equals(key)){
                             n.printVideo(j,i);
                             break;
                         }
