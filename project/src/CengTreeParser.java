@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -47,6 +48,42 @@ public class CengTreeParser
     public static void startParsingCommandLine() throws IOException
     {
         // TODO: Start listening and parsing command line -System.in-.
+
+        Scanner scanner = new Scanner(new InputStreamReader(System.in));
+        String[] inputArray;
+        Integer key;
+        String videoTitle;
+        String channelName;
+        String category;
+        CengVideo video;
+        ArrayList<CengTreeNode> visitedNodes;
+        while(true){
+
+            String input = scanner.nextLine();
+            if(input == "quit"){
+                break;
+            }
+            else if(input == "print" ){
+                CengVideoRunner.printTree();
+                continue;
+            }
+            inputArray =input.split("\\|");
+            if(inputArray[0] == "search"){
+                key = Integer.parseInt(inputArray[1]);
+                CengVideoRunner.searchVideo(key);
+                continue;
+            }
+            else if(inputArray[0] == "add"){
+                key = Integer.parseInt(inputArray[1]);
+                videoTitle = inputArray[1];
+                channelName = inputArray[2];
+                category = inputArray[3];
+                video = new CengVideo(key, videoTitle, channelName, category);
+                CengVideoRunner.addVideo(video);
+                continue;
+            }
+
+        }
         // There are 4 commands:
         // 1) quit : End the app, gracefully. Print nothing, call nothing, just break off your command line loop.
         // 2) add : Parse and create the video, and call CengVideoRunner.addVideo(newlyCreatedVideo).

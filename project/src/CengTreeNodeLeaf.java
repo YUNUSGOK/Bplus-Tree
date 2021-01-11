@@ -10,6 +10,7 @@ public class CengTreeNodeLeaf extends CengTreeNode
         super(parent);
 
         // TODO: Extra initializations
+        type = CengNodeType.Leaf;
     }
 
     // GUI Methods - Do not modify
@@ -29,4 +30,18 @@ public class CengTreeNodeLeaf extends CengTreeNode
     }
 
     // Extra Functions
+
+    /**
+     * Method add the current leaf new video given in parameters
+     * @param video: video to added to leaf
+     */
+    public void add(CengVideo video){
+        int n = videos.size();
+        int index = 0;
+        while(index < n && videos.get(index).getKey() < video.getKey() ){
+            index++;
+        }
+        videos.add(index,video);
+    }
+
 }

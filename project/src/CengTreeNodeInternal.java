@@ -10,6 +10,7 @@ public class CengTreeNodeInternal extends CengTreeNode
         super(parent);
 
         // TODO: Extra initializations, if necessary.
+        type = CengNodeType.Internal;
     }
 
     // GUI Methods - Do not modify
