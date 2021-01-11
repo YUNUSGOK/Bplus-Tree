@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class CengTreeNodeInternal extends CengTreeNode
 {
     private ArrayList<Integer> keys;
-    public ArrayList<CengTreeNode> children;
+    private ArrayList<CengTreeNode> children;
 
     public CengTreeNodeInternal(CengTreeNode parent)
     {
@@ -52,8 +52,9 @@ public class CengTreeNodeInternal extends CengTreeNode
         CengTreeNode child = children.get(index);
         child.add(video);
         if(child.isFull()){
+            int midKey = child.keyAtMid();
             CengTreeNode newChild = child.split();
-            this.addKey(newChild.keyAtZero());
+            this.addKey(midKey);
             this.addChild(newChild);
         }
 
@@ -100,6 +101,42 @@ public class CengTreeNodeInternal extends CengTreeNode
         return this.keyAtIndex(keys.size()/2);
     }
 
+    @Override
+    public boolean find(Integer key, ArrayList<CengTreeNode> path, int level) {
+        int n = keys.size();
+        String tabs = "\t";
+        int index = 0;
+        for(int i=0; i < n ; i++ ){
+            if(keys.get(i) > key) {
+                break;
+            }
+            index++;
+        }
+        path.add(this);
+        return children.get(index).find(key,path, level+1);
+    }
+
+    @Override
+    public void print(int level) {
+        String tabs = "\t";
+        System.out.println(tabs.repeat(level) + "<index>");
+        for(Integer k : keys){
+            System.out.println(tabs.repeat(level) + k.toString());
+        }
+        System.out.println(tabs.repeat(level) + "</index>");
+        for(CengTreeNode c : children){
+            c.print(level+1);
+        }
+
+    }
+    public void printCurrent(int level){
+        String tabs = "\t";
+        System.out.println(tabs.repeat(level) + "<index>");
+        for(Integer k : keys){
+            System.out.println(tabs.repeat(level) + k.toString());
+        }
+        System.out.println(tabs.repeat(level) + "</index>");
+    }
     public void addKey(Integer key){
         int n = keys.size();
         int index = 0;

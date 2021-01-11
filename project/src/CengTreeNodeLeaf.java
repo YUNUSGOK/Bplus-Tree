@@ -74,6 +74,39 @@ public class CengTreeNodeLeaf extends CengTreeNode
     }
 
     @Override
+    public boolean find(Integer key, ArrayList<CengTreeNode> path, int level) {
+        path.add(this);
+        String tabs = "\t";
+        for(CengVideo v : videos){
+            if(v.getKey()== key){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void print(int level) {
+        String tabs = "\t";
+        if(videos.isEmpty()) return;
+        System.out.println(tabs.repeat(level) + "<data>");
+        for(int i=0; i<videos.size();i++){
+            printVideo(i,level);
+        }
+        System.out.println(tabs.repeat(level) + "</data>");
+    }
+    public void printVideo(int index,int level){
+        String tabs = "\t";
+        CengVideo v = videos.get(index);
+        System.out.print(tabs.repeat(level));
+        System.out.print("<record>");
+        System.out.print(v.getKey()+"|");
+        System.out.print(v.getVideoTitle()+"|");
+        System.out.print(v.getChannelName()+"|");
+        System.out.print(v.getCategory());
+        System.out.print("</record>"+"\n");
+    }
+    @Override
     public boolean isFull() {
         return  videos.size() > CengTreeNode.order * 2;
     }

@@ -31,15 +31,36 @@ public class CengTree
 
     public ArrayList<CengTreeNode> searchVideo(Integer key)
     {
-        // TODO: Search within whole Tree, return visited nodes.
-        // Return null if not found.
 
+        String tabs = "\t";
+        ArrayList<CengTreeNode> path = new ArrayList<>();
+        if(root.find(key, path, 0)){
+            for(int i=0; i<path.size(); i++){
+                if(path.get(i).getType()==CengNodeType.Internal){
+                    CengTreeNodeInternal n = (CengTreeNodeInternal) path.get(i);
+                    n.printCurrent(i);
+                }
+                else {
+                    CengTreeNodeLeaf n = (CengTreeNodeLeaf) path.get(i);
+                    for(int j=0; j<n.videoCount();j++){
+                        if(n.videoKeyAtIndex(j)==key){
+                            n.printVideo(j,i);
+                            break;
+                        }
+                    }
+                }
+            }
+            return path;
+        }
+        else{
+            System.out.println("Could not find "+ key.toString()+"." );
+        }
         return null;
     }
 
     public void printTree()
     {
-        // TODO: Print the whole tree to console
+        root.print(0);
     }
 
     // Any extra functions...

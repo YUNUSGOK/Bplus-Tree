@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 public abstract class CengTreeNode
 {
@@ -50,4 +51,6 @@ public abstract class CengTreeNode
     public abstract CengTreeNode split();
     public abstract int keyAtZero();
     public abstract int keyAtMid();
+    public abstract boolean find(Integer key, ArrayList<CengTreeNode> path, int level);
+    public abstract void print(int level);
 }
